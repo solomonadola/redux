@@ -7,11 +7,11 @@ import { store } from "./store/store";
 import { Provider } from "react-redux";
 import * as actions from "./store/actions";
 
-store.dispatch(actions.bugAdded("bug1"));
-store.dispatch(actions.bugAdded("bug2"));
+store.dispatch(actions.bugAdded({description:"bug1"}));
+store.dispatch(actions.bugAdded({description:"bug2"}));
 console.log(store.getState(), "Bug added");
 
-store.dispatch(actions.bugResolved(1));
+store.dispatch(actions.bugResolved({id:1}));
 
 console.log(store.getState(), "bug resolved");
 const root = ReactDOM.createRoot(document.getElementById("root"));
