@@ -3,9 +3,17 @@ import ReactDOM from "react-dom/client";
 import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
-import store from "./store/store";
+import { store } from "./store/store";
 import { Provider } from "react-redux";
+import * as actions from "./store/actions";
 
+store.dispatch(actions.bugAdded("bug1"));
+store.dispatch(actions.bugAdded("bug2"));
+console.log(store.getState(), "Bug added");
+
+store.dispatch(actions.bugResolved(1));
+
+console.log(store.getState(), "bug resolved");
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>

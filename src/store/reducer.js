@@ -1,14 +1,22 @@
-import { INCREAMENT_COUNTER } from "./action";
+import * as actions from "./actionTypes"
+let lastId = 0;
 
-const initialState = {
-  counter: 0,
-};
-const counterReducer = (state = initialState, action) => {
-  switch (action.type) {
-    case INCREAMENT_COUNTER:
-      return { ...state, counter: state.counter + 1 };
-    default:
-      return state;
+export function reducer(state=[], action) {
+  if (action.type === actions.bugAdded) {
+    return [
+      ...state,
+      {
+        id: ++lastId,
+        description: action.payload.description,
+        resolved: false,
+      },
+    ];
   }
-};
-export default counterReducer;
+  else if(action.type === actions.bugRemoved){
+    return state.filter(bug => bug.id !== action.payload.id);
+  }
+  else if(action.type === actions.bugResolved){
+    return state.map(bug => bug.id === action.payload.id ? {...bug, resolved:true}: bug)
+  }
+    return state;
+}
